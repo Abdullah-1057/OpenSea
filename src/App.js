@@ -14,6 +14,8 @@ import {
 function App() {
   return (
     <div className="container">
+      <Navbar/>
+      <hr />
         <Routes>
           <Route path="/" element={<Marketplace />}/>
           <Route path="/nftPage" element={<NFTPage />}/>        

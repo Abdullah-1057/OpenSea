@@ -1,4 +1,5 @@
 import logo from '../logo_3.png';
+
 import fullLogo from '../full_logo.png';
 import {
   BrowserRouter as Router,
@@ -14,6 +15,8 @@ import { useLocation } from 'react-router';
 function Navbar() {
 
 const [connected, toggleConnect] = useState(false);
+const [MyState, setMyState] = useState(false);
+
 const location = useLocation();
 const [currAddress, updateAddress] = useState('0x');
 
@@ -35,11 +38,11 @@ function updateButton() {
 }
 
 async function connectWebsite() {
-
+    setMyState(true);
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
     if(chainId !== '0x5')
     {
-      //alert('Incorrect network! Switch your metamask network to Rinkeby');
+      alert('Incorrect network! Switch your metamask network to Rinkeby');
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: '0x5' }],
@@ -52,6 +55,8 @@ async function connectWebsite() {
         getAddress();
         window.location.replace(location.pathname)
       });
+      setMyState(false);
+
 }
 
   useEffect(() => {
@@ -96,11 +101,11 @@ async function connectWebsite() {
               }
               {location.pathname === "/sellNFT" ? 
               <li className='border-b-2 hover:pb-0 p-2'>
-                <Link to="/sellNFT">List My NFT</Link>
+                <Link to="/sellNFT">ListMyNFT</Link>
               </li>
               :
               <li className='hover:border-b-2 hover:pb-0 p-2'>
-                <Link to="/sellNFT">List My NFT</Link>
+                <Link to="/sellNFT">ListMyNFT</Link>
               </li>              
               }              
               {location.pathname === "/profile" ? 
